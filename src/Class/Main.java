@@ -20,6 +20,7 @@ public class Main {
      * imprime lo encontrado en ella simpre y cuando sea un archivo
      * @param direction Direcion en la cual se realizara la busqueda
      * @param information Inormara  si la carpeta esta basia o no
+     *                    XD
      */
     public static void  searsh(String direction,boolean information){
         File carpeta = new File(direction);
