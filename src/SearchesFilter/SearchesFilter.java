@@ -1,4 +1,5 @@
-package Class;
+package SearchesFilter ;
+
 
 import java.io.File;
 import java.io.FileFilter;
@@ -41,11 +42,11 @@ public class SearchesFilter {
                     System.out.println("No hay elementos dentro de la carpeta actual");
                 }//close if
                 else {
-                    filterFile(archivos, searcheCode);
+                    filterFile(archivos, searcheCode,false);
                 }//close else
             }
         }catch (Exception e){
-            System.out.println("No permission");
+            System.out.println("No permission/"+e);
         }//close catch
     }//close search
 
@@ -75,7 +76,7 @@ public class SearchesFilter {
                 }
             }//close for
         }catch (Exception e){
-            System.out.println("no permission");
+            System.out.println("no permission*");
         }
     }//close filterFile
 
@@ -96,19 +97,28 @@ public class SearchesFilter {
      */
     public static void filterFile(File files[],String type,boolean position){
         String subName="";
+       try {
+
+
         for (int i=0; i< files.length; i++) {
             File file = files[i];
             String nameFIle=file.getName();
             int searchLength=type.length();
             int nameLength=nameFIle.length();
-            if(position==true) {
-                 subName= nameFIle.substring(nameLength - searchLength);
-            }else {
-                subName = nameFIle.substring(0,nameLength - searchLength);
-            }
-            if(subName.compareToIgnoreCase(type)==0){
-                System.out.println(nameFIle);
-            }
+            int stringlength=nameLength-searchLength;
+            if(stringlength>0) {
+                if (position) {
+                    subName = nameFIle.substring(0, searchLength);
+                } else {
+                    subName = nameFIle.substring(nameLength - searchLength);
+                }
+                if (subName.compareToIgnoreCase(type) == 0) {
+                    System.out.println(nameFIle);
+                }
+            }//if length
         }//close for
+       }catch (Exception e){
+           System.out.println("no permission*");
+       }
     }//close filterFile
 }//close SearchFilter
