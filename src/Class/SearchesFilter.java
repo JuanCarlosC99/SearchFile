@@ -94,21 +94,29 @@ public class SearchesFilter {
      * The search starts with the first characters or with the last to be compared
      * La busqueda inicia con los primeros caracteres o con los ultimos a comparar 
      */
+
     public static void filterFile(File files[],String type,boolean position){
         String subName="";
-        for (int i=0; i< files.length; i++) {
-            File file = files[i];
-            String nameFIle=file.getName();
-            int searchLength=type.length();
-            int nameLength=nameFIle.length();
-            if(position==true) {
-                 subName= nameFIle.substring(nameLength - searchLength);
-            }else {
-                subName = nameFIle.substring(0,nameLength - searchLength);
-            }
-            if(subName.compareToIgnoreCase(type)==0){
-                System.out.println(nameFIle);
-            }
-        }//close for
+        try {
+            for (int i=0; i< files.length; i++) {
+                File file = files[i];
+                String nameFIle=file.getName();
+                int searchLength=type.length();
+                int nameLength=nameFIle.length();
+                int stringlength=nameLength-searchLength;
+                if(stringlength>0) {
+                    if (position) {
+                        subName = nameFIle.substring(0, searchLength);
+                    } else {
+                        subName = nameFIle.substring(nameLength - searchLength);
+                    }
+                    if (subName.compareToIgnoreCase(type) == 0) {
+                        System.out.println(nameFIle);
+                    }
+                }//if length
+            }//close for
+        }catch (Exception e){
+            System.out.println("no permission*");
+        }
     }//close filterFile
 }//close SearchFilter
